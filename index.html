@@ -75,3 +75,32 @@
     </div>
   </div>
 
+  <script>
+    const apiKey = "1e27408f47cf403ab0664006250810";
+
+    $("#btnCari").click(function() {
+      const lokasi = $("#lokasiInput").val() || "Yogyakarta";
+      const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
+
+      $.ajax({
+        url: url,
+        method: "GET",
+        success: function(data) {
+          $("#negara").text(data.location.country);
+          $("#provinsi").text(data.location.region);
+          $("#kecamatan").text(data.location.name);
+          $("#suhu").text(data.current.temp_c);
+          $("#lon").text(data.location.lon);
+          $("#lat").text(data.location.lat);
+        },
+        error: function(err) {
+          alert("Lokasi tidak ditemukan atau terjadi kesalahan!");
+          console.log(err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
